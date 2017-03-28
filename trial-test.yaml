@@ -1,0 +1,18 @@
+metadata:
+    format: Lava-Test Test Definition 1.0
+    name: trial-tests
+    description: "Basic test for traial task"
+    maintainer:
+        - oleksandr.terentiev@gmail.com
+    os:
+        - debian
+    scope:
+        - functional
+run:
+    steps:
+        - lava-test-case linux-linaro-ubuntu-pwd --shell pwd
+        - lava-test-case linux-linaro-ubuntu-uname --shell uname -a
+        - lava-test-case linux-linaro-ubuntu-vmstat --shell vmstat
+        - lava-test-case linux-linaro-ubuntu-ifconfig --shell ifconfig -a
+        - lava-test-case linux-linaro-ubuntu-lscpu --shell lscpu
+
