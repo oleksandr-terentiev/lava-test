@@ -1,0 +1,57 @@
+device_type: qemu-arm
+job_name: QEMU pipeline, first job
+
+timeouts:
+  job:
+    minutes: 15
+  action:
+    minutes: 5
+  connection:
+    minutes: 2
+priority: medium
+visibility: public
+
+# context allows specific values to be overridden or included
+context:
+  # tell the qemu template which architecture is being tested
+  # the template uses that to ensure that qemu-system-x86_64 is executed.
+  arch: amd64
+
+metadata:
+  # please change these fields when modifying this job for your own tests.
+  docs-source: first-job
+  docs-filename: qemu-pipeline-first-job.yaml
+
+# ACTION_BLOCK
+actions:
+- deploy:
+    timeout:
+      minutes: 5
+    to: tmpfs
+    images:
+      rootfs:
+        image_arg: -drive format=raw,file={rootfs}
+        url: http://localhost/static/docs/test/stretch-2.img.gz
+        compression: gz
+    os: debian
+
+# BOOT_BLOCK
+- boot:
+    timeout:
+      minutes: 5
+    method: qemu
+    media: tmpfs
+    prompts: ["root@debian:"]
+    auto_login:
+      login_prompt: "login:"
+      username: root
+
+- test:
+    timeout:
+      minutes: 5
+    definitions:
+    - repository: https://github.com/oleksandr-terentiev/lava-test.git
+      from: git
+      path: trial-test.yaml
+      name: trial-tests
+
