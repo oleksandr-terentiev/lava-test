@@ -15,4 +15,4 @@ run:
         - lava-test-case linux-linaro-ubuntu-vmstat --shell vmstat
         - lava-test-case linux-linaro-ubuntu-ifconfig --shell ifconfig -a
         - lava-test-case linux-linaro-ubuntu-lscpu --shell lscpu
-
+        - $(./check_kvm.sh)
