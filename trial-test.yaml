@@ -15,7 +15,5 @@ run:
         - lava-test-case linux-linaro-ubuntu-vmstat --shell vmstat
         - lava-test-case linux-linaro-ubuntu-ifconfig --shell ifconfig -a
         - lava-test-case linux-linaro-ubuntu-lscpu --shell lscpu
-        - 'REGEX="\bkvm\b|\bkvm_amd\b"'
-        - 'if [[ $(lsmod) =~ $REGEX ]]; then'
-        - 'lava-test-case "${NAME}" --result pass'
-        - 'else lava-test-case "${NAME}" --result fail; fi'
+        - 'chmod 755 ./check_kvm.sh'
+        - $(./check_kvm.sh)
