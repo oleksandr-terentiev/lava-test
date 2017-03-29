@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
  
 REGEX="\bkvm\b|\bkvm_amd\b"
 if [[ $(lsmod) =~ $REGEX ]]; then
